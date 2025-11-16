@@ -817,7 +817,9 @@
 #elif MB(MKS_NEPTUNE_X)
   #include "stm32f4/pins_MKS_NEPTUNE_X.h"           // STM32F4                              env:mks_neptune_x
 #elif MB(MKS_NEPTUNE_3)
-  #include "stm32f4/pins_MKS_NEPTUNE_3.h"           // STM32F4                              env:mks_neptune_3
+  #include "stm32f4/pins_MKS_NEPTUNE_3.h"           // STM32F4
+#elif MB(MARLIN_WITH_OPENPNP)
+  #include "stm32f4/pins_MARLIN_WITH_OPENPNP.h"     // STM32F4                              env:genericSTM32F407VET6
 
 //
 // Other ARM Cortex-M4

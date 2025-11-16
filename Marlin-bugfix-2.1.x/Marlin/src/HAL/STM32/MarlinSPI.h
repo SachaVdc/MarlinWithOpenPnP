@@ -27,6 +27,17 @@
 extern "C" {
   #include <utility/spi_com.h>
 }
+// ----- Patch compatibilité STM32 -----
+// La lib SPI STM32 utilise SPIMode + SPI_MODE0..3
+// Marlin attend spi_mode_e + SPI_MODE_0..3
+
+enum spi_mode_e : uint8_t {
+  SPI_MODE_0 = SPI_MODE0,
+  SPI_MODE_1 = SPI_MODE1,
+  SPI_MODE_2 = SPI_MODE2,
+  SPI_MODE_3 = SPI_MODE3
+};
+
 
 /**
  * Marlin currently requires 3 SPI classes:
