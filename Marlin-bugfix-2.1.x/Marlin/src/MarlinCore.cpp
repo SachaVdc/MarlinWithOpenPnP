@@ -57,6 +57,7 @@
 #include "gcode/gcode.h"
 #include "gcode/parser.h"
 #include "gcode/queue.h"
+#include "gcode\custom\M950.h"
 
 #include "feature/pause.h"
 #include "sd/cardreader.h"
@@ -1051,6 +1052,7 @@ inline void tmc_standby_setup() {
   #if PIN_EXISTS(E7_STDBY)
     SET_INPUT_PULLDOWN(E7_STDBY_PIN);
   #endif
+
 } // tmc_standby_setup()
 
 /**
@@ -1704,6 +1706,8 @@ void setup() {
   SETUP_LOG("setup() completed.");
 
   TERN_(MARLIN_TEST_BUILD, runStartupTests());
+
+  CAN1_Init();
 } // setup()
 
 /**

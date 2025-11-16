@@ -336,6 +336,7 @@
  *** Custom codes (can be changed to suit future G-code standards) ***
  * G425 - Calibrate using a conductive object. (Requires CALIBRATION_GCODE)
  * M928 - Start SD logging: "M928 filename.gco". Stop with M29. (Requires SDSUPPORT)
+ * M950 - Can communication with external devices.
  * M993 - Backup SPI Flash to SD
  * M994 - Load a Backup from SD to SPI Flash
  * M995 - Touch screen calibration for TFT display
@@ -1290,6 +1291,8 @@ private:
   #if ENABLED(OTA_FIRMWARE_UPDATE)
     static void M936();
   #endif
+
+   static void M950();
 
   #if ENABLED(MAGNETIC_PARKING_EXTRUDER)
     static void M951();
