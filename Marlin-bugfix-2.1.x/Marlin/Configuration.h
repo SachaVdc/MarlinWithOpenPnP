@@ -1313,7 +1313,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 1000, 1000, 100, 25, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 1000, 1000, 500, 25, 25 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1869,7 +1869,7 @@
 //#define Z_CLEARANCE_FOR_HOMING  4   // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
-#define Z_AFTER_HOMING         21   // (mm) Height to move to after homing (if Z was homed)
+#define Z_AFTER_HOMING         20   // (mm) Height to move to after homing (if Z was homed)
 //#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
 
 //#define EVENT_GCODE_AFTER_HOMING "M300 P440 S200"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
@@ -1904,8 +1904,8 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 320
-#define Y_BED_SIZE 385
+#define X_BED_SIZE 350
+#define Y_BED_SIZE 390
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1914,10 +1914,10 @@
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 60
-#define I_MIN_POS 0
-#define I_MAX_POS 50
-#define J_MIN_POS 0
-#define J_MAX_POS 50
+#define I_MIN_POS -180
+#define I_MAX_POS 180
+#define J_MIN_POS -180
+#define J_MAX_POS 180
 //#define K_MIN_POS 0
 //#define K_MAX_POS 50
 //#define U_MIN_POS 0
@@ -2374,7 +2374,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (4*60), (10*60), (10*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (40*60), (10*60), (10*60) }
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 //#define EDITABLE_HOMING_FEEDRATE

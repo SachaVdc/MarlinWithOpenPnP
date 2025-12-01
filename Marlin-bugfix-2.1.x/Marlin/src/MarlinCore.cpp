@@ -1708,6 +1708,7 @@ void setup() {
   TERN_(MARLIN_TEST_BUILD, runStartupTests());
 
   CAN1_Init();
+  MesurePression_Init();
 } // setup()
 
 /**
@@ -1746,4 +1747,5 @@ void loop() {
 
   } while (ENABLED(__AVR__)); // Loop forever on slower (AVR) boards
   //detecterPiece(PS_VACUUM_1);
+  mesurerPressionTank();
 }

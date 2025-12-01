@@ -1,49 +1,68 @@
-// #include <Arduino.h>
-// #include "src/pins/stm32f4/pins_MARLIN_WITH_OPENPNP.h"
+#include <Arduino.h>
+#include "MarlinCore.h"
+#include "pins/pins.h"
+#include "pins/stm32f4/pins_MARLIN_WITH_OPENPNP.h"
 
-// -------------------------------
-// Mesurer la pression du tank
-// -------------------------------
-// void mesurerPressionTank() {
-//     int valeurADC = analogRead(PS_TANK);
-//     Serial.print("Pression Tank (ADC) : ");
-//     Serial.println(valeurADC);
-// }
+void MesurePression_Init() {
+    // Initialisation des broches si nécessaire
+    pinMode(PS_TANK, INPUT);
+    pinMode(PS_VACUUM_1, INPUT);
+    pinMode(PS_VACUUM_2, INPUT);
+    pinMode(PUMP_1, OUTPUT);
+    pinMode(ELECTROVALVE_1, OUTPUT);
+}
 
-// -------------------------------
-// Détecter la présence d’une pièce (digital)
-// -------------------------------
-// void detecterPiece(int pinVacuum) {
-//     int etat = digitalRead(pinVacuum);
+//-------------------------------
+//Mesurer la pression du tank
+//-------------------------------
 
-//     Serial.print("Vacuum pin ");
-//     Serial.print(pinVacuum);
-//     Serial.print(" = ");
-//     Serial.println(etat);
+void mesurerPressionTank() {
+    // Lecture du capteur
+    int valeurADC = analogRead(PS_TANK);
 
-//     if (etat == HIGH) {
-//         Serial.println("Pièce présente");
-//     } else {
-//         Serial.println("Aucune pièce détectée");
-//     }
-// }
+    // Affichage (facultatif)
+    Serial.print("Pression Tank (ADC) : ");
+    Serial.println(valeurADC);
 
-// void setup() {
-//     Serial.begin(115200);
+    // --- Hystérésis ---
+    // Si pression < 200 → couper la pompe
+    if (valeurADC < 200) {
+        digitalWrite(PUMP_1, LOW);        // Pompe OFF
+    }
 
-//     // PA0 : entrée analogique
-//     pinMode(PS_TANK, INPUT);
+    // Si pression > 330 → rallumer la pompe
+    else if (valeurADC > 330) {
+        digitalWrite(PUMP_1, HIGH);        // Pompe ON
+    }
+}
 
-//     // PA1 & PA2 : entrées digitales
-//     pinMode(PS_VACUUM_1, INPUT);
-//     pinMode(PS_VACUUM_2, INPUT);
-// }
+//-------------------------------
+//Détecter la présence d’une pièce (digital)
+//-------------------------------
+void detecterPiece(int pinVacuum) {
+    static unsigned long lastCheck = 0;      // mémorise le dernier envoi
+    const unsigned long interval = 500;      // 500 ms
 
-// void loop() {
-//     mesurerPressionTank();
+    unsigned long now = millis();
 
-    
+    // Si 500 ms sont écoulées, on envoie l'état
+    if (now - lastCheck >= interval) {
+        lastCheck = now;
+
+        int etat = digitalRead(pinVacuum);
+
+        Serial.print("Vacuum pin ");
+        Serial.print(pinVacuum);
+        Serial.print(" = ");
+        Serial.println(etat);
+
+        if (etat == HIGH) {
+            Serial.println("Pièce présente");
+        } else {
+            Serial.println("Aucune pièce détectée");
+        }
+    }
+}
+
+//     detecterPiece(PS_VACUUM_1);
 //     detecterPiece(PS_VACUUM_2);
-
-//     delay(500);
-// }
