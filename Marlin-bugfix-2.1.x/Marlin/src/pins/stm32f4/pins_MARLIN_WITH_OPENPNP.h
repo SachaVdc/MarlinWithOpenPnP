@@ -73,8 +73,8 @@
 #define LIGHT_BOT PB4      // M42 P20 (S255 or S0)
 
 #define PS_TANK PA0     // Pressure sensor tank
-#define PS_VACUUM_1 PA1 // Pressure sensor head 1
-#define PS_VACUUM_2 PA2 // Pressure sensor head 2
+#define PS_VACUUM_1 PA2 // Pressure sensor head 1
+#define PS_VACUUM_2 PA1 // Pressure sensor head 2
 
 //
 // Limit Switches

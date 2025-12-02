@@ -1748,4 +1748,5 @@ void loop() {
   } while (ENABLED(__AVR__)); // Loop forever on slower (AVR) boards
   //detecterPiece(PS_VACUUM_1);
   mesurerPressionTank();
+  detecterPiece();
 }

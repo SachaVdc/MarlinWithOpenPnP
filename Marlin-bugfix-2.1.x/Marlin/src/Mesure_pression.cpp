@@ -5,9 +5,7 @@
 
 void MesurePression_Init() {
     // Initialisation des broches si nécessaire
-    pinMode(PS_TANK, INPUT);
-    pinMode(PS_VACUUM_1, INPUT);
-    pinMode(PS_VACUUM_2, INPUT);
+    // pinMode(PS_TANK, INPUT);
     pinMode(PUMP_1, OUTPUT);
     pinMode(ELECTROVALVE_1, OUTPUT);
 }
@@ -21,8 +19,8 @@ void mesurerPressionTank() {
     int valeurADC = analogRead(PS_TANK);
 
     // Affichage (facultatif)
-    Serial.print("Pression Tank (ADC) : ");
-    Serial.println(valeurADC);
+    // Serial.print("Pression Tank (ADC) : ");
+    // Serial.println(valeurADC);
 
     // --- Hystérésis ---
     // Si pression < 200 → couper la pompe
@@ -39,28 +37,24 @@ void mesurerPressionTank() {
 //-------------------------------
 //Détecter la présence d’une pièce (digital)
 //-------------------------------
-void detecterPiece(int pinVacuum) {
-    static unsigned long lastCheck = 0;      // mémorise le dernier envoi
-    const unsigned long interval = 500;      // 500 ms
+void detecterPiece() {
 
-    unsigned long now = millis();
+    if (analogRead(PS_VACUUM_1) < 330) 
+    {
+        // Pièce détectée
+    } 
+    else 
+    {
+        // Pas de pièce
+    }
 
-    // Si 500 ms sont écoulées, on envoie l'état
-    if (now - lastCheck >= interval) {
-        lastCheck = now;
-
-        int etat = digitalRead(pinVacuum);
-
-        Serial.print("Vacuum pin ");
-        Serial.print(pinVacuum);
-        Serial.print(" = ");
-        Serial.println(etat);
-
-        if (etat == HIGH) {
-            Serial.println("Pièce présente");
-        } else {
-            Serial.println("Aucune pièce détectée");
-        }
+    if (analogRead(PS_VACUUM_2) < 330) 
+    {
+        // Pièce détectée
+    } 
+    else 
+    {
+        // Pas de pièce
     }
 }
 

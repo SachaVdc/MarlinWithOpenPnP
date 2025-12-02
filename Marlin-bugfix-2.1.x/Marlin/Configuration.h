@@ -1301,7 +1301,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 25, 11.1, 40, 500, 500 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 88.88, 40, 1.11, 1.11 }
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -2374,7 +2374,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (40*60), (10*60), (10*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (35*60), (10*60), (10*60) }
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 //#define EDITABLE_HOMING_FEEDRATE
