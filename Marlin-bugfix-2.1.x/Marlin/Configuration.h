@@ -1313,7 +1313,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 1000, 1000, 500, 25, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 1000, 1000, 300, 10, 10 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1904,7 +1904,7 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 350
+#define X_BED_SIZE 370
 #define Y_BED_SIZE 390
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
@@ -2374,7 +2374,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (35*60), (10*60), (10*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (50*60), (10*60), (10*60) }
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 //#define EDITABLE_HOMING_FEEDRATE
