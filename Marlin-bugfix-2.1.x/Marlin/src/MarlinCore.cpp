@@ -1709,6 +1709,9 @@ void setup() {
 
   CAN1_Init();
   MesurePression_Init();
+
+  pinMode(RS485_DE_RE, OUTPUT);
+  digitalWrite(RS485_DE_RE, HIGH);   // émission
 } // setup()
 
 /**
@@ -1749,4 +1752,7 @@ void loop() {
   //detecterPiece(PS_VACUUM_1);
   mesurerPressionTank();
   detecterPiece();
+  MSerial4.print("1 F 10");
+  MSerial4.print("\r\n");
+  delay(100);
 }

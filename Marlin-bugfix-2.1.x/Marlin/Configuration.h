@@ -104,9 +104,8 @@
  * Currently Ethernet (-2) is only supported on Teensy 4.1 boards.
  * :[-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
-//#define SERIAL_PORT_2 -1
-//#define BAUDRATE_2 250000   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
-
+#define SERIAL_PORT_2 4
+#define BAUDRATE_2 9600   // :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000] Enable to override BAUDRATE
 /**
  * Select a third serial port on the board to use for communication with the host.
  * Currently supported for AVR, DUE, SAMD51, LPC1768/9, STM32/STM32F1/HC32, and Teensy 4.x
@@ -119,12 +118,22 @@
  * Select a serial port to communicate with RS485 protocol
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
  */
-//#define RS485_SERIAL_PORT 1
-#ifdef RS485_SERIAL_PORT
-  //#define M485_PROTOCOL 1   // Check your host for protocol compatibility
-  //#define RS485_BUS_BUFFER_SIZE 128
+
+//#define ENABLE_RS485
+#ifdef ENABLE_RS485
+  #define RS485_SERIAL_PORT 4
+  #define RS485_BAUDRATE 9600
+  #define M485_PROTOCOL 1   // Check your host for protocol compatibility
+  #define RS485_BUS_BUFFER_SIZE 128
 #endif
 
+//define ENABLE_CANBUS
+#ifdef ENABLE_CANBUS
+  #define ENABLE_CANBUS
+  #define CANBUS_SERIAL_PORT 2
+  #define CANBUS_BAUDRATE 500000
+  #define CANBUS_BUS_BUFFER_SIZE 256
+#endif
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
 
@@ -1313,7 +1322,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 1000, 1000, 300, 10, 10 }
+#define DEFAULT_MAX_FEEDRATE          { 1000, 1000, 200, 500, 500 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1326,7 +1335,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 10000, 10000, 1000, 10000, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 10000, 10000, 150, 1000, 1000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1869,7 +1878,7 @@
 //#define Z_CLEARANCE_FOR_HOMING  4   // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
-#define Z_AFTER_HOMING         20   // (mm) Height to move to after homing (if Z was homed)
+#define Z_AFTER_HOMING         21   // (mm) Height to move to after homing (if Z was homed)
 //#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
 
 //#define EVENT_GCODE_AFTER_HOMING "M300 P440 S200"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
@@ -1914,10 +1923,10 @@
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 60
-#define I_MIN_POS -180
-#define I_MAX_POS 180
-#define J_MIN_POS -180
-#define J_MAX_POS 180
+#define I_MIN_POS -10000
+#define I_MAX_POS 10000
+#define J_MIN_POS -10000
+#define J_MAX_POS 10000
 //#define K_MIN_POS 0
 //#define K_MAX_POS 50
 //#define U_MIN_POS 0
@@ -2374,7 +2383,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (50*60), (10*60), (10*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (35*60), (10*60), (10*60) }
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 //#define EDITABLE_HOMING_FEEDRATE

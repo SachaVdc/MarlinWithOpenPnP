@@ -127,6 +127,10 @@
 //#define CAN_RX PD0
 //#define CAN_TX PD1
 
-//#define RS485_RX PC11
-//#define RS485_TX PC10
-//#define RS485_DE PC12
+
+//#define RS485_RX                             PC11
+//#define RS485_TX                             PC10
+#define RS485_DE_RE                          PC12
+
+#define UART4_TX_PIN PC10
+#define UART4_RX_PIN PC11

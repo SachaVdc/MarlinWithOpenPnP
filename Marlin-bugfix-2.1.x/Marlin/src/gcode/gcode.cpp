@@ -1101,6 +1101,12 @@ void GcodeSuite::process_parsed_command(bool no_ok/*=false*/) {
         case 869: M869(); break;                                  // M869: Report axis error
       #endif
 
+      case 949: M949(); break;
+
+      #if ENABLED(ENABLE_CANBUS)
+        case 950: M950(); break;
+      #endif
+
       #if ENABLED(MAGNETIC_PARKING_EXTRUDER)
         case 951: M951(); break;                                  // M951: Set Magnetic Parking Extruder parameters
       #endif
